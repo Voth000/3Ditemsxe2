@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <title>xe02</title>
+    <style>
+		
+				
+		@media 
+		
+		/* Fairly small screens including iphones */
+		only screen and (max-width: 500px),
+		
+		/* iPads */
+		only screen and (min-device-width: 768px) and (max-device-width: 1024px) 
+		
+		{
+			#top, #bottom, #left, #right { display: none; }
+		}
+	</style>
+</head>
+<body>
+    <div id="left"></div>
+    <div id="right"></div>
+    <div id="top"></div>
+    <div id="bottom"></div>
+
+
+  
+
+<canvas class="webgl" id="load"></canvas>
+
+
+
+<script src="index.js" type="module"></script>
+<script src="main.js" defer></script>
+
+
+
+</body>
+</html>

@@ -1,3 +1,48 @@
+
+@media (max-width: 500px) {
+
+    a#idfoot {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 40px;
+        max-height: 44px;
+        padding: 4px !important ;
+        margin: 0px !important;
+    }
+
+    footer {
+        padding: 8px;
+    
+    }
+    span#mb {
+        display: unset !important;
+    }
+   span#nb {
+        display: none !important;
+    }
+    #in span {
+        display: none !important;
+    }
+
+    #in {
+        max-width: 30% !important;
+    }
+    span {
+        max-width: 40% !important;
+    }
+   
+}
+
+
+
+
+
+
+
+
+
 html,body {
     overflow: hidden;
     font-family: 'Roboto Mono', monospace;
@@ -14,8 +59,14 @@ body{
     margin: 0px;
 }
 
+button:focus {
+    outline-color: #fc894d;
+    box-shadow: 2px 2px 5px #fc894d;
+}
 
-
+button {
+    display: none;
+}
 
 canvas {
     background-color: rgb(252, 252, 252);
@@ -24,3 +75,204 @@ canvas {
     height: 100%;
 }
 
+a#idfoot{
+    filter: drop-shadow(2px 2px 2px #dbfef55c);
+    padding-bottom: 6px !important;
+    box-shadow: 2px 2px 8px 0px  #f66eff47;
+   padding: 6px;
+    transition:  all .3s ease;
+    margin: 10px;
+    color: #ff16c9;
+    background-color: #ffffff;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+a#idfoot:hover {
+    filter: drop-shadow(1px 1px 2px #d640ff8a);
+    color: #e7f9f1;
+    background-color: #f99de7;
+    padding: 6px;
+}
+
+footer { margin: 0px;
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 2;
+font-weight: 200;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+#hd {
+    text-align: right;
+    width: auto;
+    right: 4px;
+    top: 4px;
+    border-radius: 20px;
+position: absolute;
+    font-weight: 200;
+display: grid;
+grid-gap: 4px;
+z-index: 1;
+grid-template-rows: auto auto;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+span {
+    cursor: default;
+ max-width: 30%;
+    align-self: right;
+  justify-self: right;
+    text-align: right;
+   width: fit-content;
+    padding: 8px;
+    color: #000000c0;
+    background-color: #fbff005f;
+    border-radius: 20px;
+}
+
+#info span {
+  
+   
+    background-color: unset;
+    border: unset;
+    color: #ff00c959;
+}
+
+#info {
+    width: fit-content;
+}
+
+/* color: #ed9df9a7; */
+
+#in {
+    max-width: 20%;
+    left: 0;
+    top: 0px;
+    z-index: 2;
+    position: absolute;
+    font-weight: 200;
+display: grid;
+grid-gap: 8px;
+grid-template-rows: auto auto auto ;
+padding: 4px;
+}
+
+#vb {
+    display: grid;
+    grid-gap: 4px;
+}
+
+#js {
+    max-width: 100%;
+    align-self: left;
+  justify-self: left;
+    text-align: left;
+   width: fit-content;
+    padding: 8px;
+    font-size: 14px;
+    line-height: 14px;
+    position: absolute;
+    color: #ff49fc;
+    opacity: 0;
+}
+
+#btn5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#btn3{
+    cursor: pointer;
+    max-height: 44px;
+    display: flex;
+justify-content: center;
+align-items: center;
+    filter: drop-shadow(2px 2px 2px #dbfef55c);
+    font-size: 12px;
+    line-height: 14px;
+    box-shadow: 2px 2px 8px 0px  #f66eff47;
+   padding: 8px;
+    transition:  all .3s ease;
+    color: #ffffff;
+    background-color: #ff16c9;
+    text-decoration: none;
+    border-radius: 20px;
+}
+
+.dud {
+    color: #fff200 !important;
+}
+
+#btn3:hover {
+    
+        filter: drop-shadow(1px 1px 2px #d640ff8a);
+        color: #e7f9f1;
+        background-color: #f99de7;
+        padding: 9px;
+    
+}
+
+
+
+#in span {
+    max-width: 100%;
+    align-self: left;
+  justify-self: left;
+    text-align: left;
+padding: 0;
+    background-color: unset;
+    border: unset;
+    color: #000000a7;
+    font-size: 12px;
+    line-height: 14px;
+    display: block;
+}
+
+#name {
+    gap: 10px;
+    display: flex;
+align-items: center;
+}
+
+span#mb {
+    display: none;
+}
+span#nb {
+    display: block ;
+}
+
+h4, h3 {
+    margin: 0px;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+h3 {
+    color: #ff00be75;
+}
+
+h4 {
+    
+    color: #191919ba;
+}
+
+#if {
+    cursor: default;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 8px;
+}
+
+canvas#load.webgl:active, canvas#load.webgl:hover, canvas#load.webgl {
+outline: 1px solid #e016ff;
+}

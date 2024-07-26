@@ -1,0 +1,56 @@
+#s1 {
+top:20%;
+left: 20%;
+}
+
+#s2 {
+    top:80%;
+    left: 40%;
+    }
+
+    #s3 {
+        top:60%;
+        right: 20%;
+        }
+        #s4 {
+            top:10%;
+            right: 30%;
+            }
+    
+            onmousemove = function(e){
+ 
+
+                //meat and potatoes of the snippet
+                var pos = e;
+                var dot;
+                dot = document.createElement('div');
+                dot.className = "dot";
+                dot.style.left = pos.x + "px";
+                dot.style.top = pos.y + "px";
+                document.body.appendChild(dot);
+              }      
+
+
+             
+              let activeIndex2 = 0;
+              
+              function switchButton(event) {
+                 
+              
+                  const bebes = document.querySelectorAll('.bebe');
+                  bebes[activeIndex2].classList.remove('active'); 
+                  if (event.type === 'wheel') {
+                      activeIndex2 = (activeIndex2 + (event.deltaY > 0 ? 1 : -1) + bebes.length) % bebes.length; 
+                  } else if (event.type === 'mouseover') {
+                    activeIndex2 = Array.from(buttons).indexOf(event.target); 
+                  }
+                  bebes[activeIndex2].classList.add('active'); 
+              
+                  setTimeout(() => {
+                    
+                      bebes[activeIndex2].classList.add('active');
+                  }, 20); 
+              }
+              
+              
+              window.addEventListener('wheel', switchButton);

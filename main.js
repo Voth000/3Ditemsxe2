@@ -1,153 +1,103 @@
-// ——————————————————————————————————————————————————
-// TextScramble
-// ——————————————————————————————————————————————————
+let activeIndex = 0;
+let activeIndex1 = 0;
+let activeIndex2 = 0;
 
-class TextScramble {
-    constructor(el) {
-      this.el = el
-      this.chars = '!^?#__'
-      this.update = this.update.bind(this)
+function switchButton(event) {
+    const buttons = document.querySelectorAll('.main1');
+    buttons[activeIndex].classList.remove('active'); 
+    if (event.type === 'wheel') {
+        activeIndex = (activeIndex + (event.deltaY > 0 ? 1 : -1) + buttons.length) % buttons.length; 
+    } else if (event.type === 'mouseover') {
+        activeIndex = Array.from(buttons).indexOf(event.target); 
     }
-    setText(newText) {
-      const oldText = this.el.innerText
-      const length = Math.max(oldText.length, newText.length)
-      const promise = new Promise((resolve) => this.resolve = resolve)
-      this.queue = []
-      for (let i = 0; i < length; i++) {
-        const from = oldText[i] || ''
-        const to = newText[i] || ''
-        const start = Math.floor(Math.random() * 10)
-        const end = start + Math.floor(Math.random() * 2)
-        this.queue.push({ from, to, start, end })
+    buttons[activeIndex].classList.add('active'); 
+
+    const boxs = document.querySelectorAll('.main2');
+    boxs[activeIndex1].classList.remove('active'); 
+    if (event.type === 'wheel') {
+        activeIndex1 = (activeIndex1 + (event.deltaY > 0 ? 1 : -1) + boxs.length) % boxs.length; 
+    } else if (event.type === 'mouseover') {
+        activeIndex1 = Array.from(buttons).indexOf(event.target); 
+    }
+    boxs[activeIndex1].classList.add('active'); 
+
+    const bebes = document.querySelectorAll('.bebe');
+    bebes[activeIndex2].classList.remove('active'); 
+    if (event.type === 'wheel') {
+        activeIndex2 = (activeIndex2 + (event.deltaY > 0 ? 1 : -1) + bebes.length) % bebes.length; 
+    } else if (event.type === 'mouseover') {
+      activeIndex2 = Array.from(buttons).indexOf(event.target); 
+    }
+    bebes[activeIndex2].classList.add('active'); 
+
+    // GSAP animation
+    gsap.fromTo(bebes[activeIndex2], 
+      { y: -100, opacity: 0 }, 
+      { 
+          y: 0, 
+          opacity: 1, 
+          duration: 0.5, 
+          ease: "power2.out"
       }
-      cancelAnimationFrame(this.frameRequest)
-      this.frame = 0
-      this.update()
-      return promise
-    }
-    update() {
-      let output = ''
-      let complete = 0
-      for (let i = 0, n = this.queue.length; i < n; i++) {
-        let { from, to, start, end, char } = this.queue[i]
-        if (this.frame >= end) {
-          complete++
-          output += to
-        } else if (this.frame >= start) {
-          if (!char || Math.random() < 0.18) {
-            char = this.randomChar()
-            this.queue[i].char = char
-          }
-          output += `<span class="dud">${char}</span>`
-        } else {
-          output += from
-        }
-      }
-      this.el.innerHTML = output
-      if (complete === this.queue.length) {
-        this.resolve()
-      } else {
-        this.frameRequest = requestAnimationFrame(this.update)
-        this.frame++
-      }
-    }
-    randomChar() {
-      return this.chars[Math.floor(Math.random() * this.chars.length)]
-    }
+  );
+
+    setTimeout(() => {
+        buttons[activeIndex].classList.add('active');
+        boxs[activeIndex1].classList.add('active');
+        bebes[activeIndex2].classList.add('active');
+    }, 20); 
+}
+
+
+window.addEventListener('wheel', switchButton);
+
+
+const buttons = document.querySelectorAll('.main1');
+buttons.forEach(button => {
+    button.addEventListener('mouseover', switchButton);
+});
+
+var dotLimit = 2000;
+  var dots = [];
+onmousemove = function(e){
+ 
+  document.onmousemove = function(e) {
+    // Create a new dot
+    var dot = document.createElement('div');
+    dot.className = "dot";
+    dot.style.left = e.pageX + "px";
+    dot.style.top = e.pageY + "px";
+    document.body.appendChild(dot);
+
+    // Add the new dot to the dots array
+    dots.push(dot);
+
+    // Check if the number of dots exceeds the limit
+    if (dots.length > dotLimit) {
+      // Remove the oldest dot from the DOM and the array
+      var oldestDot = dots.shift();
+      document.body.removeChild(oldestDot);
+    } 
+  };
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  var videos = document.querySelectorAll('video'); // Select all video elements
+  var flElement = document.querySelector('.fl');
+
+  if (videos.length > 0 && flElement) {
+    videos.forEach(function(video) {
+      video.addEventListener('mousemove', function(e) {
+        flElement.style.display = 'block';
+        flElement.style.left = e.pageX + 10 + 'px'; // 10px offset for better visibility
+        flElement.style.top = e.pageY + 10 + 'px'; // 10px offset for better visibility
+      });
+
+      video.addEventListener('mouseleave', function() {
+        flElement.style.display = 'none';
+      });
+    });
+  } else {
+    console.error('No video elements or the .fl element are not found in the DOM.');
   }
-  
-  // ——————————————————————————————————————————————————
-  // Example
-  // ——————————————————————————————————————————————————
-  
-  const phrases = [
-    'Loading...',
-    "Please wait...",
-    'Loading...',
-    'Checking your internet conection...',
-  ]
-  
-  const el = document.querySelector('#js')
-  const fx = new TextScramble(el)
-  
-  let counter = 0
-  const next = () => {
-    fx.setText(phrases[counter]).then(() => {
-      setTimeout(next, 800)
-    })
-    counter = (counter + 1) % phrases.length
-  }
-  
-  next()
- 
- // ——————————————————————————————————————————————————
- // TextScramble
- // 
- 
- 
- 
- TweenMax.to("#js", 2,{
-    x:"50vw",
-    scale: "3",
-    top: "50vh",
-    ease:"Expo.easeInOut",
-    delay: 0.5,
-    opacity: 1,
- });
- 
-  gsap.to("#js", 2, {
-    y: 40,
-    opacity: 0,
-    ease: "power2.inOut",
-    delay: 8,
-  });
- 
-  gsap.from("#vb", 1, {
-    x: -40,
-    opacity: 0,
-    ease: "power2.inOut",
-    delay: 2,
-  });
-    
- 
-  gsap.from("#nb", 1, {
-    x: 40,
-    opacity: 0,
-    ease: "power2.inOut",
-    delay: 3,
-  });
- 
-  gsap.from("#mb", 1, {
-    x: 40,
-    opacity: 0,
-    ease: "power2.inOut",
-    delay: 3,
-  });
- 
-  gsap.from("h4", 1, {
-    x: 40,
-    opacity: 0,
-    ease: "power2.inOut",
-    delay: 4,
-  });
- 
-  gsap.from("h3", 1, {
-    x: 40,
-    opacity: 0,
-    ease: "power2.inOut",
-    delay: 4.75,
-  });
-  
-  gsap.from("#btn5", 1, {
-    x: 40,
-    opacity: 0,
-    ease: "power2.inOut",
-    delay: 5.25,
-  });
- 
-  
-    
-
-
-
-
+});
